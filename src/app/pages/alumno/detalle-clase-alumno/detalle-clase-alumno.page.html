@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title> Detalle de Clase </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-card *ngIf="clase">
+    <!-- Verifica si 'clase' está definida -->
+    <ion-card-header> {{ clase.asignatura }} </ion-card-header>
+    <ion-card-content>
+      <p>Horario: {{ clase.horaInicio }} - {{ clase.horaFin }}</p>
+      <p>Fecha: {{ clase.fecha }}</p>
+      <p>Cantidad de Alumnos: {{ clase.alumnos }}</p>
+      <p>Profesor Jefe: {{ clase.profesorJefe }}</p>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-button [expand]="'full'" [color]="'success'" (click)="generarQRCode()">
+    Escanear Código QR
+  </ion-button>
+</ion-content>

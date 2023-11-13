@@ -1,0 +1,54 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title class="fw-bold fs-2"> RegisterApp </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding" style="background-color: black; color: white">
+  <!-- Saludo al usuario -->
+  <p class="h3 fw-bold m-5 text-center animate__animated animate__bounce">
+    <span class="h1 fw-bold text-warning">B</span>
+    ienvenido {{ nombreUsuario }}
+  </p>
+
+  <!-- Título: Tus clases de hoy -->
+  <p class="h3 fw-bold m-5 text-center">Tus clases de hoy</p>
+
+  <!-- Lista de clases -->
+  <ion-list>
+    <ion-item *ngFor="let clase of clasesHoy" (click)="verDetalleClase(clase)">
+      <ion-label>
+        <h2>{{ clase.asignatura }}</h2>
+        <p>Horario: {{ clase.horaInicio }} - {{ clase.horaFin }}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+  <!-- Título: Tu asistencia -->
+  <p class="h3 fw-bold m-5 text-center">Tus asignaturas</p>
+
+  <!-- Primera lista de asignaturas y porcentaje de asistencia -->
+  <ion-list class="mt-3">
+    <ion-item *ngFor="let clase of clasesHoy">
+      <ion-label>
+        <h2>{{ clase.asignatura }}</h2>
+        <p>Seccion: 05D</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+  <!-- Segunda lista de asignaturas y porcentaje de asistencia -->
+  <ion-list>
+    <ion-item *ngFor="let clase of clasesHoy">
+      <ion-label>
+        <h2>{{ clase.asignatura }}</h2>
+        <p>Seccion: 05D</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+  <!-- Botón de logout -->
+  <ion-button [expand]="'block'" class="mt-5" color="danger" (click)="logout()">
+    Logout
+  </ion-button>
+</ion-content>

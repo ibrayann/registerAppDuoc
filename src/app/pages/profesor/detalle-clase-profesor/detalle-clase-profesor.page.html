@@ -1,0 +1,46 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Detalle de Clase</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-card *ngIf="clase">
+    <!-- Verifica si 'clase' está definida -->
+    <ion-card-header>{{ clase.asignatura }}</ion-card-header>
+    <ion-card-content>
+      <p>Horario: {{ clase.horaInicio }} - {{ clase.horaFin }}</p>
+      <p>Fecha: {{ clase.fecha }}</p>
+      <p>Cantidad de Alumnos: {{ clase.alumnos }}</p>
+      <p>Profesor Jefe: {{ clase.profesorJefe }}</p>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-button [expand]="'full'" [color]="'success'" (click)="generarQRCode()">
+    Generar Código QR
+  </ion-button>
+
+  <!-- Imagen oculta al principio -->
+  <ion-img
+    src="../../assets/IMG_2249.JPG"
+    [hidden]="!mostrarImagen"
+    style="width: 100%; height: 50%"
+  ></ion-img>
+
+  <!-- Listado de Alumnos en una tarjeta -->
+  <ion-card class="mt-5">
+    <ion-card-header>
+      <ion-title>Alumnos</ion-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <ion-item class="py-2 py-3" *ngFor="let alumno of listaAlumnos">
+          {{ alumno }} - Presente
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

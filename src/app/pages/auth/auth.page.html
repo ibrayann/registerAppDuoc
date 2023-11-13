@@ -1,0 +1,78 @@
+<app-header title="Login"></app-header>
+
+<ion-content>
+  <div class="d-flex-center">
+    <form
+      [formGroup]="form"
+      class="auth-form"
+      (ngSubmit)="submit()"
+      (ketpress.enter)="submit()"
+    >
+      <app-logo></app-logo>
+      <app-custom-input
+        [label]="'Email'"
+        [type]="'email'"
+        [icon]="'mail'"
+        [control]="form.controls.email"
+        [autocomplete]="'email'"
+      ></app-custom-input>
+      <div
+        class="validators"
+        *ngIf="form.controls.email.invalid && form.controls.password.touched"
+      >
+        <div *ngIf="form.controls.email.errors?.['required']">
+          El email es requerido
+        </div>
+        <div *ngIf="form.controls.email.errors?.['email']">
+          El email no es válido
+        </div>
+      </div>
+
+      <app-custom-input
+        [label]="'Contraseña'"
+        [type]="'password'"
+        [icon]="'lock-closed'"
+        [control]="form.controls.password"
+        [autocomplete]="'current-password'"
+      ></app-custom-input>
+
+      <div
+        class="validators"
+        *ngIf="form.controls.password.invalid && form.controls.password.touched"
+      >
+        <div *ngIf="form.controls.password.errors?.['required']">
+          La contraseña es requerida
+        </div>
+        <div *ngIf="form.controls.password.errors?.['minlength']">
+          La contraseña debe tener al menos 6 caracteres
+        </div>
+      </div>
+
+      <ion-button
+        expand="block"
+        type="submit"
+        shape="round"
+        mode="ios"
+        class="submit"
+        [disabled]="form.invalid"
+        color="dark"
+      >
+        Click me
+        <ion-icon slot="end" name="arrow-forward-outline"></ion-icon>
+      </ion-button>
+
+      <ion-button
+        expand="block"
+        shape="round"
+        mode="ios"
+        fill="outline"
+        class="ion-margin-top"
+        color="dark"
+        routerLink="sign-up"
+      >
+        Registrate
+        <ion-icon slot="end" name="person-add-outline"></ion-icon>
+      </ion-button>
+    </form>
+  </div>
+</ion-content>

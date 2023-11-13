@@ -1,0 +1,67 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title class="fw-bold fs-2"> RegisterApp </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding" style="background-color: black; color: white">
+  <!-- Saludo al usuario -->
+  <p class="h3 fw-bold m-5 text-center animate__animated animate__bounce">
+    <span class="h1 fw-bold text-warning">B</span>
+    ienvenido {{ nombreUsuario }}
+  </p>
+  <ion-button expand="full" (click)="recargarPagina()">
+    Recargar Página
+  </ion-button>
+
+  <!-- Título: Tus clases de hoy -->
+  <p class="h3 fw-bold m-5 text-center">Tus clases de hoy</p>
+
+  <!-- Lista de clases -->
+  <ion-list>
+    <ion-item *ngFor="let clase of clasesHoy" (click)="verDetalleClase(clase)">
+      <ion-label>
+        <h2>{{ clase.asignatura }}</h2>
+        <p>Horario: {{ clase.horaInicio }} - {{ clase.horaFin }}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+  <!-- Título: Tu asistencia -->
+  <p class="h3 fw-bold m-5 text-center">Tu asistencia</p>
+
+  <!-- Primera lista de asignaturas y porcentaje de asistencia -->
+  <ion-accordion-group>
+    <ion-accordion [value]="'lenguajeAccordion'">
+      <ion-item slot="header" color="light">
+        <ion-label>Lenguaje</ion-label>
+      </ion-item>
+      <ion-list slot="content">
+        <!-- Iterar sobre cada instancia del array -->
+        <ion-item *ngFor="let item of asistencia; let i = index">
+          <ion-label>
+            <!-- Detalles específicos para cada instancia -->
+            <p>Fecha: {{ item.fecha }}</p>
+            <p>Presente</p>
+            <!-- Agrega más campos según tus necesidades -->
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-accordion>
+  </ion-accordion-group>
+
+  <!-- Segunda lista de asignaturas y porcentaje de asistencia -->
+  <ion-list>
+    <ion-item *ngFor="let clase of clasesHoy">
+      <ion-label>
+        <h2>{{ clase.asignatura }}</h2>
+        <p>Porcentaje de Asistencia: 90%</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+  <!-- Botón de logout -->
+  <ion-button [expand]="'block'" class="mt-5" color="danger" (click)="logout()">
+    Logout
+  </ion-button>
+</ion-content>
