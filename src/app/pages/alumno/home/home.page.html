@@ -10,9 +10,15 @@
     <span class="h1 fw-bold text-warning">B</span>
     ienvenido {{ nombreUsuario }}
   </p>
-  <ion-button expand="full" (click)="recargarPagina()">
-    Recargar Página
-  </ion-button>
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content
+      pullingIcon="arrow-down"
+      pullingText="Desliza para actualizar"
+      refreshingSpinner="circles"
+      refreshingText="Actualizando..."
+    >
+    </ion-refresher-content>
+  </ion-refresher>
 
   <!-- Título: Tus clases de hoy -->
   <p class="h3 fw-bold m-5 text-center">Tus clases de hoy</p>
@@ -32,13 +38,54 @@
 
   <!-- Primera lista de asignaturas y porcentaje de asistencia -->
   <ion-accordion-group>
+    <ion-accordion [value]="'matematicaAccordion'">
+      <ion-item slot="header" color="light">
+        <ion-label>Matematica</ion-label>
+      </ion-item>
+      <ion-list slot="content">
+        <!-- Iterar sobre cada instancia del array -->
+        <ion-item
+          *ngFor="let item of   matematicas
+; let i = index"
+        >
+          <ion-label>
+            <!-- Detalles específicos para cada instancia -->
+            <p>Fecha: {{ item.fecha }}</p>
+            <p>Presente</p>
+            <!-- Agrega más campos según tus necesidades -->
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-accordion>
+    <ion-accordion [value]="'historiaAccordion'">
+      <ion-item slot="header" color="light">
+        <ion-label>Historia</ion-label>
+      </ion-item>
+      <ion-list slot="content">
+        <!-- Iterar sobre cada instancia del array -->
+        <ion-item
+          *ngFor="let item of   historia
+; let i = index"
+        >
+          <ion-label>
+            <!-- Detalles específicos para cada instancia -->
+            <p>Fecha: {{ item.fecha }}</p>
+            <p>Presente</p>
+            <!-- Agrega más campos según tus necesidades -->
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-accordion>
     <ion-accordion [value]="'lenguajeAccordion'">
       <ion-item slot="header" color="light">
         <ion-label>Lenguaje</ion-label>
       </ion-item>
       <ion-list slot="content">
         <!-- Iterar sobre cada instancia del array -->
-        <ion-item *ngFor="let item of asistencia; let i = index">
+        <ion-item
+          *ngFor="let item of   lenguaje
+; let i = index"
+        >
           <ion-label>
             <!-- Detalles específicos para cada instancia -->
             <p>Fecha: {{ item.fecha }}</p>
@@ -51,14 +98,6 @@
   </ion-accordion-group>
 
   <!-- Segunda lista de asignaturas y porcentaje de asistencia -->
-  <ion-list>
-    <ion-item *ngFor="let clase of clasesHoy">
-      <ion-label>
-        <h2>{{ clase.asignatura }}</h2>
-        <p>Porcentaje de Asistencia: 90%</p>
-      </ion-label>
-    </ion-item>
-  </ion-list>
 
   <!-- Botón de logout -->
   <ion-button [expand]="'block'" class="mt-5" color="danger" (click)="logout()">

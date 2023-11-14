@@ -11,7 +11,9 @@ import { UtilsService } from 'src/app/services/utils.service';
 export class HomePage {
   clasesHoy: any[]; // Inicializamos el array vacío
   nombreUsuario: string; // Variable para el nombre de usuario
-  asistencia: any[];
+  lenguaje: any[];
+  matematicas: any[];
+  historia: any[];
 
   constructor(private router: Router) {
     // Ejemplo de cómo podrías obtener las clases programadas para hoy
@@ -20,13 +22,29 @@ export class HomePage {
     // Ejemplo de cómo podrías obtener el nombre de usuario (reemplaza esto con tu lógica real)
     const { name } = JSON.parse(localStorage.getItem('user'));
     this.nombreUsuario = name; // Reemplaza con el nombre real del usuario
-    this.clases(
+    this.clasesMatematica(
+      'users/' +
+        JSON.parse(localStorage.getItem('user')).uid +
+        '/' +
+        'Matemáticas'
+    );
+    this.clasesLenguaje(
       'users/' + JSON.parse(localStorage.getItem('user')).uid + '/' + 'Lenguaje'
+    );
+    this.clasesHistoria(
+      'users/' + JSON.parse(localStorage.getItem('user')).uid + '/' + 'Historia'
     );
   }
 
-  recargarPagina() {
-    window.location.reload();
+  doRefresh(event) {
+    // Aquí irá la lógica para actualizar los datos o realizar alguna acción
+    // por ejemplo, realizar una solicitud HTTP para obtener datos actualizados
+
+    // Simulando una solicitud HTTP con un retardo de 1.5 segundos
+    setTimeout(() => {
+      // Finalizar el componente de actualización
+      window.location.reload();
+    }, 1500);
   }
 
   firebaseSvc = inject(FirebaseService);
@@ -87,12 +105,40 @@ export class HomePage {
     ]);
   }
 
-  clases(path) {
+  clasesLenguaje(path) {
     console.log(path);
     let sub = this.firebaseSvc.getAsistencia(path).subscribe({
       next: (res) => {
-        this.asistencia = res;
-        console.log(this.asistencia);
+        this.lenguaje = res;
+        console.log(this.lenguaje);
+        sub.unsubscribe();
+      },
+      error: (err) => {
+        console.log(err);
+        sub.unsubscribe();
+      },
+    });
+  }
+  clasesMatematica(path) {
+    console.log(path);
+    let sub = this.firebaseSvc.getAsistencia(path).subscribe({
+      next: (res) => {
+        this.matematicas = res;
+        console.log(this.matematicas);
+        sub.unsubscribe();
+      },
+      error: (err) => {
+        console.log(err);
+        sub.unsubscribe();
+      },
+    });
+  }
+  clasesHistoria(path) {
+    console.log(path);
+    let sub = this.firebaseSvc.getAsistencia(path).subscribe({
+      next: (res) => {
+        this.historia = res;
+        console.log(this.historia);
         sub.unsubscribe();
       },
       error: (err) => {
