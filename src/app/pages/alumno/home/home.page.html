@@ -37,64 +37,26 @@
   <p class="h3 fw-bold m-5 text-center">Tu asistencia</p>
 
   <!-- Primera lista de asignaturas y porcentaje de asistencia -->
-  <ion-accordion-group>
-    <ion-accordion [value]="'matematicaAccordion'">
-      <ion-item slot="header" color="light">
-        <ion-label>Matematica</ion-label>
-      </ion-item>
-      <ion-list slot="content">
-        <!-- Iterar sobre cada instancia del array -->
-        <ion-item
-          *ngFor="let item of   matematicas
-; let i = index"
-        >
-          <ion-label>
-            <!-- Detalles específicos para cada instancia -->
-            <p>Fecha: {{ item.fecha }}</p>
-            <p>Presente</p>
-            <!-- Agrega más campos según tus necesidades -->
-          </ion-label>
+  <ion-accordion-group color="light">
+    <ng-container color="light" *ngFor="let asignatura of asignaturasUnicas">
+      <ion-accordion
+        style="background-color: white"
+        [value]="asignatura"
+        color="light"
+      >
+        <ion-item style="background-color: white" slot="header" color="light">
+          <ion-label>{{ asignatura }}</ion-label>
         </ion-item>
-      </ion-list>
-    </ion-accordion>
-    <ion-accordion [value]="'historiaAccordion'">
-      <ion-item slot="header" color="light">
-        <ion-label>Historia</ion-label>
-      </ion-item>
-      <ion-list slot="content">
-        <!-- Iterar sobre cada instancia del array -->
-        <ion-item
-          *ngFor="let item of   historia
-; let i = index"
-        >
-          <ion-label>
-            <!-- Detalles específicos para cada instancia -->
-            <p>Fecha: {{ item.fecha }}</p>
-            <p>Presente</p>
-            <!-- Agrega más campos según tus necesidades -->
-          </ion-label>
-        </ion-item>
-      </ion-list>
-    </ion-accordion>
-    <ion-accordion [value]="'lenguajeAccordion'">
-      <ion-item slot="header" color="light">
-        <ion-label>Lenguaje</ion-label>
-      </ion-item>
-      <ion-list slot="content">
-        <!-- Iterar sobre cada instancia del array -->
-        <ion-item
-          *ngFor="let item of   lenguaje
-; let i = index"
-        >
-          <ion-label>
-            <!-- Detalles específicos para cada instancia -->
-            <p>Fecha: {{ item.fecha }}</p>
-            <p>Presente</p>
-            <!-- Agrega más campos según tus necesidades -->
-          </ion-label>
-        </ion-item>
-      </ion-list>
-    </ion-accordion>
+        <ion-list slot="content">
+          <ion-item *ngFor="let item of gruposPorAsignatura[asignatura]">
+            <ion-label>
+              <p>Fecha: {{ item.fecha }}</p>
+              <!-- Agrega más campos según tus necesidades -->
+            </ion-label>
+          </ion-item>
+        </ion-list>
+      </ion-accordion>
+    </ng-container>
   </ion-accordion-group>
 
   <!-- Segunda lista de asignaturas y porcentaje de asistencia -->

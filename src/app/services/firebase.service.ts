@@ -16,7 +16,6 @@ import {
   addDoc,
   collection,
   collectionData,
-  query,
 } from '@angular/fire/firestore';
 import { UtilsService } from './utils.service';
 

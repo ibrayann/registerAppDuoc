@@ -11,9 +11,9 @@ import { UtilsService } from 'src/app/services/utils.service';
 export class HomePage {
   clasesHoy: any[]; // Inicializamos el array vacío
   nombreUsuario: string; // Variable para el nombre de usuario
-  lenguaje: any[];
-  matematicas: any[];
-  historia: any[];
+  clasesAll: any[];
+  asignaturasUnicas: string[] = [];
+  gruposPorAsignatura: any = {};
 
   constructor(private router: Router) {
     // Ejemplo de cómo podrías obtener las clases programadas para hoy
@@ -22,20 +22,21 @@ export class HomePage {
     // Ejemplo de cómo podrías obtener el nombre de usuario (reemplaza esto con tu lógica real)
     const { name } = JSON.parse(localStorage.getItem('user'));
     this.nombreUsuario = name; // Reemplaza con el nombre real del usuario
-    this.clasesMatematica(
-      'users/' +
-        JSON.parse(localStorage.getItem('user')).uid +
-        '/' +
-        'Matemáticas'
-    );
-    this.clasesLenguaje(
-      'users/' + JSON.parse(localStorage.getItem('user')).uid + '/' + 'Lenguaje'
-    );
-    this.clasesHistoria(
-      'users/' + JSON.parse(localStorage.getItem('user')).uid + '/' + 'Historia'
+
+    this.clasesGet(
+      'users/' + JSON.parse(localStorage.getItem('user')).uid + '/Clases'
     );
   }
 
+  organizarDatosPorAsignatura() {
+    this.clasesAll.forEach((item) => {
+      if (!this.gruposPorAsignatura[item.asignatura]) {
+        this.gruposPorAsignatura[item.asignatura] = [];
+        this.asignaturasUnicas.push(item.asignatura);
+      }
+      this.gruposPorAsignatura[item.asignatura].push(item);
+    });
+  }
   doRefresh(event) {
     // Aquí irá la lógica para actualizar los datos o realizar alguna acción
     // por ejemplo, realizar una solicitud HTTP para obtener datos actualizados
@@ -57,7 +58,7 @@ export class HomePage {
     // Debes adaptar esto a tu fuente de datos real
     return [
       {
-        asignatura: 'Matemáticas',
+        asignatura: 'Lenguaje',
         horaInicio: '09:00 AM',
         horaFin: '10:30 AM',
         fecha: this.obtenerFechaActual(),
@@ -105,12 +106,13 @@ export class HomePage {
     ]);
   }
 
-  clasesLenguaje(path) {
+  clasesGet(path) {
     console.log(path);
     let sub = this.firebaseSvc.getAsistencia(path).subscribe({
       next: (res) => {
-        this.lenguaje = res;
-        console.log(this.lenguaje);
+        this.clasesAll = res;
+        console.log(this.clasesAll);
+        this.organizarDatosPorAsignatura();
         sub.unsubscribe();
       },
       error: (err) => {
@@ -119,35 +121,6 @@ export class HomePage {
       },
     });
   }
-  clasesMatematica(path) {
-    console.log(path);
-    let sub = this.firebaseSvc.getAsistencia(path).subscribe({
-      next: (res) => {
-        this.matematicas = res;
-        console.log(this.matematicas);
-        sub.unsubscribe();
-      },
-      error: (err) => {
-        console.log(err);
-        sub.unsubscribe();
-      },
-    });
-  }
-  clasesHistoria(path) {
-    console.log(path);
-    let sub = this.firebaseSvc.getAsistencia(path).subscribe({
-      next: (res) => {
-        this.historia = res;
-        console.log(this.historia);
-        sub.unsubscribe();
-      },
-      error: (err) => {
-        console.log(err);
-        sub.unsubscribe();
-      },
-    });
-  }
-
   logout() {
     this.firebaseSvc.salir();
   }

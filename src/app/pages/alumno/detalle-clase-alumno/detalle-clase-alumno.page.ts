@@ -61,6 +61,7 @@ export class DetalleClaseAlumnoPage implements OnInit {
       return;
     }
     const { barcodes } = await BarcodeScanner.scan();
+    console.log(barcodes[0].rawValue);
     this.barcodes = this.limpiarYParsearJSON(barcodes[0].rawValue);
     console.log('Barcode data', this.barcodes);
 
@@ -83,7 +84,7 @@ export class DetalleClaseAlumnoPage implements OnInit {
 
   envioDeDatos(data) {
     console.log(this.user);
-    let path = 'users/' + this.user + '/' + data.asignatura;
+    let path = 'users/' + this.user + '/Clases';
     this.firebaseSvc.addAsistencia(path, data).then((res) => {
       console.log('Se guardó correctamente');
     });

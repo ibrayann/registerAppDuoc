@@ -26,7 +26,7 @@ export class HomePage {
     // Debes adaptar esto a tu fuente de datos real
     return [
       {
-        asignatura: 'Matemáticas',
+        asignatura: 'Lenguaje',
         horaInicio: '09:00 AM',
         horaFin: '10:30 AM',
         fecha: this.obtenerFechaActual(),
