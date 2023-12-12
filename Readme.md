@@ -23,13 +23,13 @@ La aplicación móvil desarrollada con Ionic tiene como objetivo gestionar el re
    ![Pantalla de Inicio de Sesión](/src/assets/IMG_5724.PNG)
 
 2. **Escáner QR para Asistencia:**
-   ![Escáner QR](link-a-imagen2)
+   ![Escáner QR](/src/assets/IMG_5725.PNG)
 
 3. **Resumen de Asistencia del Alumno:**
-   ![Resumen de Asistencia](link-a-imagen3)
+   ![Resumen de Asistencia](/src/assets/IMG_5726.PNG)
 
-- **Enlace de Descarga de la APK:** Descarga la APK para acceder a la aplicación. **[¡Es crucial para utilizar la aplicación!](enlace-a-APK)**
+- **Enlace de Descarga de la APK:** Descarga la APK para acceder a la aplicación. **[¡Es crucial para utilizar la aplicación!](https://github.com/ibrayann/registerAppDuoc/releases/tag/registerApp)**
 
 ## Enlaces de Descarga y Código Fuente
 
-- **Código Fuente:** [Enlace al Repositorio del Código Fuente](enlace-al-codigo)
+- **Código Fuente:** [Enlace al Repositorio del Código Fuente](https://github.com/ibrayann/registerAppDuoc)
