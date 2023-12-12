@@ -20,7 +20,7 @@ La aplicación móvil desarrollada con Ionic tiene como objetivo gestionar el re
 ## Imágenes Relativas al Caso de Estudio
 
 1. **Pantalla de Inicio de Sesión:**
-   ![Pantalla de Inicio de Sesión](/assets/IMG_5724.PNG)
+   ![Pantalla de Inicio de Sesión](/src/assets/IMG_5724.PNG)
 
 2. **Escáner QR para Asistencia:**
    ![Escáner QR](link-a-imagen2)
